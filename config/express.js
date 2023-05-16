@@ -1,15 +1,15 @@
-import express from "express";
-import { json } from "body-parser";
-import { get } from "config";
+const express = require("express");
+const bodyParser = require("body-parser");
+const config = require("config");
 
-export default () => {
+module.exports = () => {
   const app = express();
 
   // SETANDO VARIÁVEIS DA APLICAÇÃO
-  app.set("port", process.env.PORT || get("server.port"));
+  app.set("port", process.env.PORT || config.get("server.port"));
 
   // MIDDLEWARES
-  app.use(json());
+  app.use(bodyParser.json());
 
   return app;
 };

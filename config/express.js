@@ -11,5 +11,7 @@ module.exports = () => {
   // MIDDLEWARES
   app.use(bodyParser.json());
 
+  // require('../api/route/teste.js')(app)
+
   return app;
 };

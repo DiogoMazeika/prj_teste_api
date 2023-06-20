@@ -1,10 +1,10 @@
-module.exports = (res) => {
-  console.debug('aqui', res);
-  // const app = express();
-  res.send('Received a GET HTTP method2');
+const express = require("express");
+const router = express.Router();
 
-  // const controller = require('../controllers/teste.controller.js')();
+// Rota GET para '/teste'
+router.get("/teste", (req, res) => {
+  res.status(418);
+  res.send("Rota GET para /teste");
+});
 
-  app.route('/api/teste')
-  .get(controller.listCustomerWallets);
-}
+module.exports = router;

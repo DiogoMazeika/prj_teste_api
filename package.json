@@ -6,7 +6,7 @@
     "nodemon": "^2.0.22"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon",
     "dev": "nodemon"
   },
   "name": "prj_teste_api",

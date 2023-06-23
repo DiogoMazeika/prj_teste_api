@@ -1,36 +1,30 @@
-const app = require("./config/express")();
-const port = app.get("port");
-const fs = require("fs");
+import express from "express";
+import { readdir } from "fs";
+// import { port } from "./config/default.json";
+const port = 8080;
+const app = express();
 
 app.get("/", (req, res) => {
   return res.send("funciona!");
 });
 
-fs.readdirSync("./api/routes").forEach((file) => {
-  if (file.endsWith(".js")) {
-    import(`./api/routes/${file}`).then((vl) => {
-      app.use(`/api/`, vl.default);
-    });
-  }
+readdir("./api/routes", async (err, files) => {
+  const p = [];
+  files.forEach((file) => {
+    p.push(
+      import(`./api/routes/${file}`).then((vl) => {
+        app.use(`/api/${file.replace(".js", "")}`, vl.default);
+      })
+    );
+  });
+
+  await Promise.all(p);
+
+  app.use((req, res) => {
+    res.sendStatus(404);
+  });
 });
 
-// import("./api/routes/teste.js").then((vl) => {
-//   app.use("/api/teste", vl.default);
-// });
-
-app.post("/", (req, res) => {
-  return res.send("Received a POST HTTP method");
-});
-
-app.put("/", (req, res) => {
-  return res.send("Received a PUT HTTP method");
-});
-
-app.delete("/", (req, res) => {
-  return res.send("Received a DELETE HTTP method");
-});
-
-// RODANDO NOSSA APLICAÇÃO NA PORTA SETADA
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });

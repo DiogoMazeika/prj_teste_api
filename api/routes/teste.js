@@ -1,10 +1,13 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
+
+import { controllerTeste } from "../controllers/teste.controller.js";
+
+/* router.get((req, res, next) => {
+  next();
+}); */
 
 // Rota GET para '/teste'
-router.get("/teste", (req, res) => {
-  res.status(418);
-  res.send("Rota GET para /teste");
-});
+router.get("/aqui", controllerTeste);
 
-module.exports = router;
+export default router;

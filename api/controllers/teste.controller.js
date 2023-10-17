@@ -1,4 +1,10 @@
-export function controllerTeste(req, res) {
-  // res.status(418);
-  res.send("Rota GET para /teste");
+import { testeService } from "../services/teste.service.js";
+
+export function testeController(req, res) {
+  try{
+    const data = testeService()
+    res.send(data);
+  }catch{
+    res.status(500); // 418
+  }
 }

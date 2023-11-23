@@ -1,6 +1,6 @@
 import { testeService } from "../services/teste.service.js";
 
-export function testeController(req, res) {
+export function teste(req, res) {
   try{
     const data = testeService()
     res.send(data);

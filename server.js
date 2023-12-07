@@ -1,13 +1,13 @@
 import express from "express";
-import pg from "pg";
-import bcrypt from "bcrypt";
 import bodyParser from "body-parser";
 import session from "express-session";
+import cookieParser from "cookie-parser";
+import pg from "pg";
 import { readdir } from "fs";
 
-// import { port } from "./config/default.json";
+// import { port } from './config/default.json';
 const port = 8080;
-const app = express()
+const app = express();
 
 /* const pool = new pg.Pool({
   user: 'seu_usuario',
@@ -17,15 +17,14 @@ const app = express()
   port: 5432,
 }); */
 
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
-  session(
-    {
-      secret: "secret",
-      resave: true,
-      saveUninitialized: true
-    }
-  )
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
 );
 
 app.get("/", (req, res) => {

@@ -26,8 +26,6 @@ export async function userInfo(req, res) {
 
 export async function cadastroUser(req, res) {
   try {
-    console.debug(req.query);
-    console.debug(req.body);
     await cadastroUserService(req.query);
     res.sendStatus(200);
   } catch (e) {

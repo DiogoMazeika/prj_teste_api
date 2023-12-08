@@ -49,6 +49,7 @@ export async function cadastroUserService({
   senha,
 }) {
   const s = hashSync(`${senha}`, 12);
+  console.debug(nome, email, dataNasc, telefone, s);
   await cadastroUserDb(nome, email, dataNasc, telefone, s);
   return true;
 }

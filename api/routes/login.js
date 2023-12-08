@@ -10,6 +10,7 @@ import {
 
 // router.post("/entrar", entrar);
 router.post("/entrar", entrar);
+router.post("/criarConta", cadastroUser);
 
 router.use(async (req, res, next) => {
   if (req.cookies.sessionId) {
@@ -23,7 +24,6 @@ router.use(async (req, res, next) => {
 });
 
 router.get("/info", userInfo);
-router.post("/cadastroUser", cadastroUser);
 router.post("/sair", sair);
 
 export default router;

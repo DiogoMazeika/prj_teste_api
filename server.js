@@ -2,20 +2,11 @@ import express from "express";
 import bodyParser from "body-parser";
 import session from "express-session";
 import cookieParser from "cookie-parser";
-import pg from "pg";
 import { readdir } from "fs";
 
 // import { port } from './config/default.json';
 const port = 8080;
 const app = express();
-
-/* const pool = new pg.Pool({
-  user: 'seu_usuario',
-  host: 'localhost',
-  database: 'seu_banco_de_dados',
-  password: 'sua_senha',
-  port: 5432,
-}); */
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));

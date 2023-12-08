@@ -1,4 +1,5 @@
 import { hashSync, compareSync } from "bcrypt";
+import { cadastroUserDb } from "../data/login.db";
 
 function saveSessao(req) {
   return new Promise((res, rej) => {
@@ -11,16 +12,19 @@ function saveSessao(req) {
   });
 }
 
-export async function entrarService(login, senha, req) {
-  const userData = { id: 1, nome: "user", email: "email" };
+export async function entrarService(login, s, req) {
+  const userData = (await usuarioDb(login)).rows[0];
+  // const userData = { id: 1, nome: "user", email: "email" };
 
   if (userData) {
-    let { id } = userData;
-    // console.debug(id);
-    // id = await bcrypt.hash(`${id}`, 10);
-    // req.session.user = userData;
-    // await saveSessao(req);
-    return { ...userData, ok: true, id };
+    let { id, senha } = userData;
+    if (compareSync(s, senha)) {
+      // console.debug(id);
+      // id = await bcrypt.hash(`${id}`, 10);
+      // req.session.user = userData;
+      // await saveSessao(req);
+      return { ...userData, ok: true, id };
+    }
   }
 
   return {
@@ -46,4 +50,6 @@ export async function cadastroUserService({
 }) {
   const s = hashSync(`${senha}`, 12);
   console.debug(s, senha, compareSync(senha, s));
+  await cadastroUserDb(nome, email, dataNasc, telefone, s);
+  return true;
 }

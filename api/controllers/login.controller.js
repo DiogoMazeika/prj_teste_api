@@ -5,7 +5,8 @@ import {
 } from "../services/login.service.js";
 
 export async function entrar(req, res) {
-  const { l, s } = req.body;
+  console.debug("object");
+  const { l, s } = req.query;
   try {
     const login = await entrarService(l, s, req);
 

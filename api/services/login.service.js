@@ -15,10 +15,9 @@ function saveSessao(req) {
 export async function entrarService(login, s, req) {
   const userQuery = await usuarioDb(login);
   const userData = userQuery.rows[0];
-  console.debug(userData);
   // const userData = { id: 1, nome: "user", email: "email" };
 
-  if (userData) {
+  if (userData && userQuery.rowCount > 0) {
     let { id, senha } = userData;
     if (compareSync(s, senha)) {
       // console.debug(id);

@@ -1,5 +1,5 @@
 import { hashSync, compareSync } from "bcrypt";
-import { cadastroUserDb } from "../data/login.db.js";
+import { cadastroUserDb, usuarioDb } from "../data/login.db.js";
 
 function saveSessao(req) {
   return new Promise((res, rej) => {
